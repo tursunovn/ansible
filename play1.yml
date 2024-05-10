@@ -1,19 +1,13 @@
-- name: Ping Server
-  hosts: all
-  become: yes
-
+---
+- hosts: all
   tasks:
-
-  - name: Task-Ping
-    ping:
-
-  - name: Install Web-Server
-    apt: 
-     pkg: apache2
-     state: present
-
-  - name: copy file
-    copy:
-     src: ./file1.txt
-     dest: /home/
-     mode: 0777 
+  - name: Uninstall HTOP
+    apt:
+     pkg: htop
+     state: absent
+    become: true
+  - name: Uninstall MariaDB
+    apt:
+     name: mariadb-server
+     state: absent
+    become: true
